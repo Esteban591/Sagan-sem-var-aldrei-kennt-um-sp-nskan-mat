@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sagan sem var aldrei kennt — Spænsk matvælabyltingin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:     #D62828;
+  --red-dark:#9B1C1C;
+  --red-light:#F05454;
+  --yellow:  #F7B731;
+  --yellow-light: #FFD966;
+  --orange:  #E8721C;
+  --white:   #FFFDF5;
+  --cream:   #FFF4D6;
+  --dark:    #1A0A00;
+  --dark2:   #2E1206;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--cream);
+  color: var(--dark);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND DECORATIONS ── */
+.bg-deco {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* SVG Guitar left side */
+.bg-guitar {
+  position: absolute;
+  left: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.07;
+  width: 260px;
+}
+
+/* SVG Tortilla right side */
+.bg-tortilla {
+  position: absolute;
+  right: -40px;
+  top: 30%;
+  opacity: 0.08;
+  width: 220px;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2.5rem;
+  background: rgba(214,40,40,0.0);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+nav.scrolled {
+  background: var(--red-dark);
+  box-shadow: 0 3px 20px rgba(0,0,0,0.3);
+}
+.nav-brand {
+  font-family: 'Abril Fatface', serif;
+  font-size: 1.4rem;
+  color: var(--yellow);
+  text-decoration: none;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+.nav-links { display: flex; gap: 1.8rem; list-style: none; }
+.nav-links a {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,253,245,0.85);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--yellow-light); }
+@media (max-width: 600px) { .nav-links { display: none; } }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 5rem 2rem 3rem;
+}
+
+.hero-stripes {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      var(--red) 0%,
+      var(--red) 33%,
+      var(--yellow) 33%,
+      var(--yellow) 66%,
+      var(--red) 66%,
+      var(--red) 100%
+    );
+  opacity: 0.92;
+  z-index: 0;
+}
+
+.hero-texture {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 60%),
+                    radial-gradient(circle at 80% 50%, rgba(0,0,0,0.15) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+}
+
+.hero-flag-badge {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--red-dark);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+.hero-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(3.2rem, 9vw, 6.5rem);
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-shadow: 3px 3px 0 var(--red-dark), 6px 6px 0 rgba(0,0,0,0.2);
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+
+.hero-title .accent { color: var(--yellow-light); }
+
+.hero-sub {
+  font-family: 'Lora', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: rgba(255,253,245,0.88);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  animation: fadeUp 0.8s ease 0.6s both;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  animation: fadeUp 0.8s ease 0.8s both;
+}
+
+.hero-badge {
+  background: rgba(255,253,245,0.15);
+  border: 1px solid rgba(255,253,245,0.4);
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  border-radius: 100px;
+}
+
+/* Big decorative SVG guitar in hero */
+.hero-guitar-deco {
+  position: absolute;
+  right: 5%;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0.18;
+  width: min(300px, 35vw);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,253,245,0.6);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  z-index: 3;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* ── INTRO ── */
+.intro {
+  position: relative;
+  z-index: 1;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.intro-big {
+  font-size: 1.25rem;
+  line-height: 1.9;
+  color: var(--dark2);
+}
+
+.intro-big strong {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.intro-big em {
+  color: var(--orange);
+  font-style: italic;
+}
+
+/* ── SECTION SHARED ── */
+.section-label {
+  display: block;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  color: var(--red-dark);
+  line-height: 1.15;
+}
+
+.section-header {
+  text-align: center;
+  padding: 3rem 2rem 0.5rem;
+}
+
+.divider {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--yellow);
+  padding: 1.5rem 0;
+  letter-spacing: 0.6em;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── TIMELINE ── */
+.timeline-section {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 2rem 5rem;
+  background: var(--white);
+  border-top: 6px solid var(--red);
+  border-bottom: 6px solid var(--yellow);
+}
+
+.timeline {
+  max-width: 760px;
+  margin: 3rem auto 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 100px;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--red), var(--yellow), var(--orange), var(--red));
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.tl-item.visible { opacity: 1; transform: translateY(0); }
+
+.tl-year {
+  text-align: right;
+  padding-top: 4px;
+  font-family: 'Abril Fatface', serif;
+  font-size: 1.15rem;
+  color: var(--red);
+  position: relative;
+}
+
+.tl-year::after {
+  content: '';
+  position: absolute;
+  right: -2.6rem;
+  top: 9px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 3px solid var(--red);
+  box-shadow: 0 0 0 3px var(--white);
+}
+
+.tl-content h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--dark);
+  margin-bottom: 0.3rem;
+}
+
+.tl-content p {
+  font-size: 0.95rem;
+  color: #5a3a1a;
+  line-height: 1.65;
+}
+
+.tl-emoji {
+  font-size: 1.4rem;
+  margin-right: 6px;
+}
+
+@media (max-width: 600px) {
+  .timeline::before { left: 65px; }
+  .tl-item { grid-template-columns: 65px 1fr; gap: 1.5rem; }
+  .tl-year::after { right: -2rem; }
+}
+
+/* ── HISTORIA SECTION ── */
+.historia-section {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 2rem 5rem;
+  background: var(--cream);
+}
+
+.historia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+}
+
+.historia-card {
+  background: var(--white);
+  border-top: 4px solid var(--red);
+  border-bottom: 4px solid var(--yellow);
+  padding: 2rem 1.75rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(214,40,40,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.historia-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(214,40,40,0.15);
+}
+
+.historia-card:nth-child(even) {
+  border-top-color: var(--yellow);
+  border-bottom-color: var(--orange);
+}
+
+.historia-num {
+  font-family: 'Abril Fatface', serif;
+  font-size: 3rem;
+  color: var(--yellow);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  -webkit-text-stroke: 2px var(--orange);
+}
+
+.historia-era {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.5rem;
+}
+
+.historia-card h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--dark);
+  margin-bottom: 0.7rem;
+  line-height: 1.3;
+}
+
+.historia-card p {
+  font-size: 0.93rem;
+  color: #5a3a1a;
+  line-height: 1.7;
+}
+
+/* ── WORLD IMPACT ── */
+.world-section {
+  position: relative;
+  z-index: 1;
+  background: var(--red);
+  padding: 5rem 2rem;
+  overflow: hidden;
+}
+
+.world-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255,215,50,0.04) 20px,
+    rgba(255,215,50,0.04) 40px
+  );
+}
+
+.world-section .section-label { color: var(--yellow-light); }
+.world-section .section-title { color: var(--yellow-light); }
+
+.world-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  position: relative;
+  z-index: 1;
+}
+
+.world-card {
+  background: rgba(255,253,245,0.1);
+  border: 1px solid rgba(255,215,50,0.3);
+  border-top: 3px solid var(--yellow);
+  padding: 1.75rem;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.world-card:hover {
+  background: rgba(255,253,245,0.18);
+  transform: translateY(-4px);
+}
+
+.world-region {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--yellow-light);
+  margin-bottom: 0.5rem;
+}
+
+.world-text {
+  font-size: 0.9rem;
+  color: rgba(255,253,245,0.85);
+  line-height: 1.7;
+}
+
+/* ── QUOTES ── */
+.quotes-section {
+  position: relative;
+  z-index: 1;
+  background: var(--yellow);
+  padding: 5rem 2rem;
+  overflow: hidden;
+}
+
+.quotes-section::after {
+  content: '🇪🇸';
+  position: absolute;
+  font-size: 20rem;
+  opacity: 0.07;
+  right: -2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+
+.quotes-section .section-label { color: var(--red-dark); }
+.quotes-section .section-title { color: var(--red-dark); }
+
+.quote-block {
+  max-width: 680px;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.quote-mark {
+  font-family: 'Abril Fatface', serif;
+  font-size: 6rem;
+  color: var(--red);
+  line-height: 0.4;
+  display: block;
+  margin-bottom: 1.2rem;
+  opacity: 0.5;
+}
+
+blockquote {
+  font-family: 'Lora', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--dark);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+cite {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red-dark);
+  font-style: normal;
+}
+
+/* ── STORY CARDS ── */
+.stories-section {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+  padding: 4rem 2rem 6rem;
+  border-top: 6px solid var(--yellow);
+}
+
+.story-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1080px;
+  margin: 3rem auto;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(214,40,40,0.1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  border-bottom: 4px solid var(--yellow);
+}
+
+.story-card.visible { opacity: 1; transform: translateY(0); }
+.story-card.reverse { direction: rtl; }
+.story-card.reverse > * { direction: ltr; }
+
+.story-img {
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.story-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  filter: saturate(1.15);
+}
+
+.story-card:hover .story-img img { transform: scale(1.06); }
+
+.story-text {
+  padding: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--white);
+}
+
+.story-num {
+  font-family: 'Abril Fatface', serif;
+  font-size: 4rem;
+  color: var(--yellow);
+  -webkit-text-stroke: 2px var(--orange);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.story-ingredient {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.6rem;
+}
+
+.story-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--dark);
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+}
+
+.story-body {
+  font-size: 0.93rem;
+  color: #5a3a1a;
+  line-height: 1.8;
+}
+
+.story-chips {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--cream);
+  border: 1px solid var(--yellow);
+  color: var(--red-dark);
+}
+
+@media (max-width: 700px) {
+  .story-card { grid-template-columns: 1fr; direction: ltr !important; }
+  .story-card > * { direction: ltr !important; }
+  .story-img { min-height: 220px; }
+  .story-text { padding: 2rem; }
+}
+
+/* ── ÞORKEL SECTION ── */
+.thorkel-section {
+  position: relative;
+  z-index: 1;
+  background: var(--dark);
+  padding: 5rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.thorkel-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--red-dark) 0%, var(--dark) 50%, #2a1000 100%);
+}
+
+.thorkel-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--white);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.thorkel-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  color: rgba(255,253,245,0.65);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.thorkel-names {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.thorkel-name {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.thorkel-name:hover {
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.thorkel-name.red {
+  color: var(--red-light);
+  border: 2px solid var(--red);
+  background: rgba(214,40,40,0.15);
+  text-shadow: 0 0 20px rgba(214,40,40,0.5);
+}
+
+.thorkel-name.yellow {
+  color: var(--yellow-light);
+  border: 2px solid var(--yellow);
+  background: rgba(247,183,49,0.12);
+  text-shadow: 0 0 20px rgba(247,183,49,0.5);
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  background: var(--red-dark);
+  color: rgba(255,253,245,0.7);
+  text-align: center;
+  padding: 3rem 2rem;
+  font-size: 0.85rem;
+  line-height: 1.9;
+  border-top: 5px solid var(--yellow);
+}
+
+.footer-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: 1.8rem;
+  color: var(--yellow);
+  margin-bottom: 0.75rem;
+}
+
+footer strong { color: var(--yellow-light); font-weight: 700; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+</style>
+</head>
+<body>
+
+<!-- Background decorative SVGs -->
+<div class="bg-deco" aria-hidden="true">
+  <!-- Guitar -->
+  <svg class="bg-guitar" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="390" rx="75" ry="85" fill="#D62828"/>
+    <ellipse cx="100" cy="390" rx="45" ry="50" fill="none" stroke="#D62828" stroke-width="3"/>
+    <ellipse cx="100" cy="250" rx="42" ry="52" fill="#D62828"/>
+    <rect x="93" y="130" width="14" height="130" fill="#D62828"/>
+    <rect x="75" y="120" width="50" height="20" rx="4" fill="#D62828"/>
+    <rect x="85" y="100" width="30" height="30" rx="3" fill="#D62828"/>
+    <circle cx="100" cy="390" r="20" fill="none" stroke="#D62828" stroke-width="2"/>
+    <line x1="70" y1="340" x2="130" y2="440" stroke="#D62828" stroke-width="1.5"/>
+    <line x1="100" y1="310" x2="100" y2="470" stroke="#D62828" stroke-width="1.5"/>
+    <line x1="130" y1="340" x2="70" y2="440" stroke="#D62828" stroke-width="1.5"/>
+    <!-- Tuning pegs -->
+    <rect x="72" y="98" width="8" height="12" rx="2" fill="#D62828"/>
+    <rect x="84" y="94" width="8" height="12" rx="2" fill="#D62828"/>
+    <rect x="108" y="94" width="8" height="12" rx="2" fill="#D62828"/>
+    <rect x="120" y="98" width="8" height="12" rx="2" fill="#D62828"/>
+  </svg>
+
+  <!-- Tortilla (frying pan with egg) -->
+  <svg class="bg-tortilla" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="140" cy="155" r="120" fill="#D62828"/>
+    <circle cx="140" cy="155" r="100" fill="#F7B731"/>
+    <circle cx="140" cy="155" r="85" fill="#E8721C"/>
+    <circle cx="140" cy="145" r="30" fill="#FFFDF5"/>
+    <circle cx="140" cy="143" r="18" fill="#F7B731"/>
+    <!-- potato rounds suggestion -->
+    <ellipse cx="95" cy="170" rx="15" ry="10" fill="rgba(255,253,245,0.3)"/>
+    <ellipse cx="188" cy="160" rx="12" ry="9" fill="rgba(255,253,245,0.3)"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="rgba(255,253,245,0.25)"/>
+    <!-- pan handle -->
+    <rect x="245" y="148" width="55" height="14" rx="7" fill="#9B1C1C"/>
+    <rect x="257" y="143" width="15" height="24" rx="4" fill="#9B1C1C"/>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-brand" href="#">🇪🇸 Sagan sem var aldrei kennt</a>
+  <ul class="nav-links">
+    <li><a href="#timalina">Tímalína</a></li>
+    <li><a href="#historia">Saga</a></li>
+    <li><a href="#heimurinn">Heimurinn</a></li>
+    <li><a href="#thorkel">Þorkel</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stripes"></div>
+  <div class="hero-texture"></div>
+
+  <!-- decorative guitar in hero -->
+  <svg class="hero-guitar-deco" viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <ellipse cx="100" cy="390" rx="75" ry="85" fill="white"/>
+    <ellipse cx="100" cy="390" rx="45" ry="50" fill="none" stroke="white" stroke-width="3"/>
+    <ellipse cx="100" cy="250" rx="42" ry="52" fill="white"/>
+    <rect x="93" y="130" width="14" height="130" fill="white"/>
+    <rect x="75" y="120" width="50" height="20" rx="4" fill="white"/>
+    <rect x="85" y="100" width="30" height="30" rx="3" fill="white"/>
+    <circle cx="100" cy="390" r="20" fill="none" stroke="white" stroke-width="2"/>
+    <line x1="100" y1="310" x2="100" y2="470" stroke="white" stroke-width="1.5"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-flag-badge">🇪🇸 Spánn · 1492 – Nútíminn</div>
+    <h1 class="hero-title">Sagan sem var<br><span class="accent">aldrei kennt</span></h1>
+    <p class="hero-sub">Hvernig spænsk matvæli breyttu gastronómíu heimsins — og hvernig Spánn varð miðlari stærstu matarbyltingarinnar í sögu mannkyns.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🌍 1492 – Í dag</span>
+      <span class="hero-badge">🌶️ 6 lykilhráefni</span>
+      <span class="hero-badge">🌎 5 heimsálfar umbreyttar</span>
+    </div>
+  </div>
+  <div class="scroll-hint">▼ &nbsp; skrunaðu niður</div>
+</section>
+
+<!-- INTRO -->
+<section class="intro" style="position:relative; z-index:1;">
+  <p class="intro-big">
+    Árið <strong>1492</strong> sigldi Kristófer Kólumbus vestur á vegum Spánar. Hann var að leita að kryddi. En hann fann <em>heimsbyltingu</em>. Hráefnin sem spænsku landnemar tóku með sér heim — <strong>tómatar, kartöflur, chili, kakó, maís og vanilía</strong> — breyttu ekki bara matargerð. Þau breyttu sögu mannkyns til eilífðar.
+  </p>
+</section>
+
+<div class="divider">— 🌶️ 🍅 🎸 —</div>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timalina">
+  <div class="section-header">
+    <span class="section-label">Sögulegt samhengi</span>
+    <h2 class="section-title">Tímalína matarbyltingarinnar</h2>
+  </div>
+  <div class="timeline" id="tl">
+
+    <div class="tl-item">
+      <div class="tl-year">1492</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">⛵</span>Kólumbus kemur til Ameríku</h3>
+        <p>Spánn opnar dyrnar að hráefnum sem voru algjörlega óþekkt í Evrópu, Asíu og Afríku. Kólumbískar skiptingar hefjast — ein stærsta matarbyltingin í sögu mannkyns.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1519</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🍫</span>Cortés flytur kakó til Spánar</h3>
+        <p>Kakó, heilagt gjaldmiðill hjá Astekum, berst til spænska hirðsins. Evrópa skilur það ekki í fyrstu — en verður svo brjáluð eftir því.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1520</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🌽</span>Maís og chili breiðast um heiminn</h3>
+        <p>Portúgalskir og spænskir kaupmenn flytja maís og chili til Afríku og Asíu. Þetta verður upphaf matarbyltingarinnar á þeim heimsálfum.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1570</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🍅</span>Tómatinn kemur til Ítalíu um Spán</h3>
+        <p>Ítalir kalla hann <em>pomo d'oro</em> — gullið epli. Þeir rækta hann fyrst sem skreytingaplöntu. Tveimur öldum síðar verður hann sál ítölskrar matargerðar og pizza verður til.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1600</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🥔</span>Kartöflur bjarga Norður-Evrópu</h3>
+        <p>Kartaflan breiðist norður á bóginn. Evrópuþjóðir geta bráðlega fætt mun fleiri íbúa. Hungursneyðar sem höfðu þar ríkt í aldanna rás heyra sögunni til.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1700</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🌶️</span>Chili verður hjarta asískar matargerðar</h3>
+        <p>Kóresk kimchi, indverskur karri og Sichuan matargerð umbreytast að eilífu. Þau þjóðin sem við höldum að hafi "alltaf" borðað chili — gerðu það aldrei fyrir 1500.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1800</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🍫</span>Súkkulaði verður heimsleg þráhyggja</h3>
+        <p>Sviss og Belgía þróa súkkulaðimenningu sína. En allt þetta á uppruna sinn í spænskri nýlenduverslun og þeirri stundu þegar Cortés smakaði xocolatl hjá Moctezuma.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">Í dag</div>
+      <div class="tl-content">
+        <h3><span class="tl-emoji">🌍</span>Spænskar arfleifðarplöntur fæða milljarða</h3>
+        <p>Maís er mest ræktuð uppskera jarðarinnar. Kartaflan fæðir yfir þrjá milljarða. Ómögulegt er að hugsa sér nútímalegan mat án þessara hráefna sem Spánn gaf heiminum.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider">— 🍅 🥔 🌶️ —</div>
+
+<!-- HISTORIA - Full story -->
+<section class="historia-section" id="historia">
+  <div class="section-header">
+    <span class="section-label">Saga gastronómíunnar</span>
+    <h2 class="section-title">Hvernig spænsk matvæli breyttu heiminum</h2>
+  </div>
+  <div class="historia-grid">
+
+    <div class="historia-card">
+      <div class="historia-num">01</div>
+      <div class="historia-era">1492 — Hin mikla uppgötvun</div>
+      <h3>Þegar heimurinn mætti sér sjálfum</h3>
+      <p>Þegar Kólumbus landaði á Karíbuhafseyjunum árið 1492 uppgötvaðu Evrópubúar matarheim sem þeir vissu ekkert um. Innfæddir borðuðu plöntur sem Evrópubúar höfðu aldrei séð: maís, kartöflur, tómatar, chili, kakó, og vanilíu. Þetta var upphafið að stærstu matarbyltingunni í sögu mannkyns.</p>
+    </div>
+
+    <div class="historia-card">
+      <div class="historia-num">02</div>
+      <div class="historia-era">1500-1600 — Spánn sem milliliður</div>
+      <h3>Spánn — brú milli tveggja heimsálfa</h3>
+      <p>Spánn varð miðpunktur þessarar byltingar. Gegnum spænskar verslunarslóðir, landvinningar og skipaskrá fóru nýjar plöntur til Ítalíu, Portúgals, og þaðan til Asíu og Afríku. Án Spánar — engin pizza, engin karri, engin kimchi eins og við þekkjum þær.</p>
+    </div>
+
+    <div class="historia-card">
+      <div class="historia-num">03</div>
+      <div class="historia-era">1600-1700 — Evrópa bragðar ný bragð</div>
+      <h3>Frá tortúreiganda til matreiðslumasters</h3>
+      <p>Í fyrstu voru Evrópubúar efasamir. Tómatinn var talinn eitraður. Kartaflan var ræktuð sem skreytingaplanta. En smám saman breytti matargerð heimsins sig grundvallarlega. Ítalska pizza, ídanska pastasósa, frönsk kartöfluréttur — allt kemur þetta frá Ameríku um Spán.</p>
+    </div>
+
+    <div class="historia-card">
+      <div class="historia-num">04</div>
+      <div class="historia-era">1700-1800 — Asía og Afríka umbreytast</div>
+      <h3>Chili — hvernig Asía varð heit</h3>
+      <p>Þegar við hugsum um indverska karrí, kóreska kimchi, eða Sichuan matargerð — þá hugsum við um hita og chili. En þessar matargerðir notuðu sinnep, engifer og önnur krydd til að ná bragð. Chili kom aðeins fyrir 500 árum, og umbreytti allt þetta á örfáum áratugum.</p>
+    </div>
+
+    <div class="historia-card">
+      <div class="historia-num">05</div>
+      <div class="historia-era">1800-1900 — Súkkulaðibyltingin</div>
+      <h3>Xocolatl verður súkkulaði</h3>
+      <p>Hjá Astekum var kakó helgur gjaldmiðill, beiskur drykkur blandaður chili og kryddi. Cortés tók hann til Spánar 1519 þar sem hann var sykraður. Um 1800 hafði Sviss og Belgía þróað sína nýju menningu í kringum þennan amerískar gjöf. Í dag er súkkulaðimarkaðurinn hundruð milljarða að verðmæti.</p>
+    </div>
+
+    <div class="historia-card">
+      <div class="historia-num">06</div>
+      <div class="historia-era">Nútíminn — Arfleifðin lifir</div>
+      <h3>Heimurinn er ekki sá sami</h3>
+      <p>Í dag borðum við tómatpizza á Ítalíu, kartöflusúpu í Þýskalandi, chili-karri á Indlandi, og kimchi á Kóreu — og við hugsum um öll þessi mat sem "upprunalegan" mat þessara landa. Það er mesta matarleg blekking sögunnar. Öll þessi hráefni komu til þeirra um Spán.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORLD IMPACT -->
+<section class="world-section" id="heimurinn">
+  <div class="section-header" style="position:relative;z-index:1;">
+    <span class="section-label">Áhrif á heimssvæði</span>
+    <h2 class="section-title">Hvernig heimurinn breyttist</h2>
+  </div>
+  <div class="world-grid">
+    <div class="world-card">
+      <div class="world-region">🍕 Ítalía og Miðjarðarhafssvæðið</div>
+      <p class="world-text">Tómatinn varð sál ítölskrar matargerðar. Pasta al pomodoro, Margherita pizza — þær eru ómögulegar án þess að Spánn hafi verið milliliður frá Mexíkó. Þetta gerðist um 1800.</p>
+    </div>
+    <div class="world-card">
+      <div class="world-region">🌶️ Indland og Suður-Asía</div>
+      <p class="world-text">Chili umbreytti hverri svæðisbundinni rétt. Vindaloo, tikka masala, chutney — hitinn sem Indverjar kalla "sinn eigin" kom aðeins fyrir 500 árum frá Ameríku.</p>
+    </div>
+    <div class="world-card">
+      <div class="world-region">🥔 Írland og Norður-Evrópa</div>
+      <p class="world-text">Kartaflan varð aðal hitaeiningagjafi og gerði mögulegan gríðarlegan íbúafjölgun — en þegar meindýr skall á 1845, fylgdi Írska hungursneyðin og ein milljón manns dó.</p>
+    </div>
+    <div class="world-card">
+      <div class="world-region">🥬 Kórea og Austur-Asía</div>
+      <p class="world-text">Áður en chili kom notaðist kimchi sinnep og engifer. Gochujang, eldheitur rauður mauki miðlægur í kóresk kynni, er eingöngu mögulegt þökk sé spænskum verslunarslóðum.</p>
+    </div>
+    <div class="world-card">
+      <div class="world-region">🌽 Vestur-Afríka</div>
+      <p class="world-text">Maís varð ríkjandi ræktun meginlandsins og fæðir milljónir. Hann endurskapaði landbúnaðarstarfsemi, mataræði og menningu um allt Afríkusvæðið.</p>
+    </div>
+    <div class="world-card">
+      <div class="world-region">🍫 Sviss og Evrópa</div>
+      <p class="world-text">Súkkulaði, eitt sinni beiskur Astekadrykkur, var sykraður og kístur. Svissneskur og belgískur súkkulaðimenning á rætur sínar beint til spænskrar nýlenduverslunar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes-section">
+  <div class="section-header" style="position:relative;z-index:1;">
+    <span class="section-label">Raddir úr sögunni</span>
+    <h2 class="section-title">Þeir sem sáu þetta gerast</h2>
+  </div>
+  <div class="quote-block" style="position:relative;z-index:1;">
+    <span class="quote-mark">"</span>
+    <blockquote>Þeir borða annað mat sem þeir kalla maís, sem er góðr á bragðið bakaður, þurrkaður og gerður í mjöl.</blockquote>
+    <cite>— Hernán Cortés, í bréfi til Karls I Spánarkonungs — 1520</cite>
+  </div>
+  <div class="quote-block" style="position:relative;z-index:1;">
+    <span class="quote-mark">"</span>
+    <blockquote>Þetta ávöxtur sem þeir kalla tómat gefur dásamlegt bragð í súpuna. En í mínu landi þorir enginn að borða hann — þeir segja að hann sé eitur.</blockquote>
+    <cite>— Spænskur friar skrifar frá Mexíkó, um 1560</cite>
+  </div>
+</section>
+
+<!-- STORY CARDS -->
+<section class="stories-section" id="sogur">
+  <div class="section-header">
+    <span class="section-label">Ítarlegar sögur</span>
+    <h2 class="section-title">Hráefnin í dýpt</h2>
+  </div>
+
+  <div class="story-card" id="sc1">
+    <div class="story-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/960px-Tomato_je.jpg" alt="Tómatar" loading="lazy">
+    </div>
+    <div class="story-text">
+      <div class="story-num">01</div>
+      <div class="story-ingredient">Tómatur</div>
+      <h3 class="story-title">Ávöxturinn sem Evrópa óttaðist í tvær aldir</h3>
+      <p class="story-body">Astekarnir kölluðu hann <em>tomatl</em>. Spænskir landnemar tóku fræ heim um 1520. Í nærri tvær aldir trúðu Evrópubúar að hann væri eitraður. Hann var aðeins ræktaður sem skraut. En svo — varð hann sál ítölskrar og spænskrar matarmenningar að eilífu.</p>
+      <div class="story-chips">
+        <span class="chip">🍕 Ítölsk pizza</span>
+        <span class="chip">🥣 Spænskt gazpacho</span>
+        <span class="chip">🌮 Mexíkósk salsa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card reverse" id="sc2">
+    <div class="story-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Cocoa_Pods.JPG/1280px-Cocoa_Pods.JPG" alt="Kakó" loading="lazy">
+    </div>
+    <div class="story-text">
+      <div class="story-num">02</div>
+      <div class="story-ingredient">Kakó / Súkkulaði</div>
+      <h3 class="story-title">Heilagur gjaldmiðill sem varð heimsleg þráhyggja</h3>
+      <p class="story-body">Hjá Astekum var kakó heilagt. <em>Xocolatl</em> — beiskur drykkur blandaður við chili og krydd — var gefinn goðum. Kakóbaunir voru gjaldmiðill. Cortés tók drykkinn til Spánar 1519, þar sem hann var sykraður og geymdur sem konunglegt leyndarmál.</p>
+      <div class="story-chips">
+        <span class="chip">🍫 Svissneskur súkkulaði</span>
+        <span class="chip">🥐 Franskt konditori</span>
+        <span class="chip">☕ Heit kakó-hefð</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card" id="sc3">
+    <div class="story-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Patates.jpg/1280px-Patates.jpg" alt="Kartöflur" loading="lazy">
+    </div>
+    <div class="story-text">
+      <div class="story-num">03</div>
+      <div class="story-ingredient">Kartafla</div>
+      <h3 class="story-title">Inka-uppgötvunin sem bjargaði Norður-Evrópu</h3>
+      <p class="story-body">Inkarnir ræktuðu þúsundir kartöfluafbrigða í 8.000 ár. Spænskir landnemar tóku hana til Evrópu um 1570. Orkuþéttleiki hennar bjargaði milljónum. En þegar meindýr náði yfir Írland 1845, dó ein milljón og ein milljón til viðbótar flúði.</p>
+      <div class="story-chips">
+        <span class="chip">🍟 Frönskur franskar</span>
+        <span class="chip">🥟 Þýsk kartöfluréttur</span>
+        <span class="chip">🍵 Rússneskt vodka</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card reverse" id="sc4">
+    <div class="story-img">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chili_pepper_2_amk.jpg/1280px-Chili_pepper_2_amk.jpg" alt="Chili" loading="lazy">
+    </div>
+    <div class="story-text">
+      <div class="story-num">04</div>
+      <div class="story-ingredient">Chili pipar</div>
+      <h3 class="story-title">Hvernig eitt rangt nafn endurskrifaði asíska matargerð</h3>
+      <p class="story-body">Kólumbus var að leita að svörtum pipar þegar hann fann chili. Hann kallaði hann ranglega "pipar" — nafn sem festist við hann. Spænskir og portúgalskir kaupmenn fluttu chili austur um Afríku til Indlands og Kína. Innan áratuga hafði hann þvingað sig inn í asíska matargerð svo þvert að Indverjar, Kórear og Taílendingar kalla chili sitt eigið fornt hráefni.</p>
+      <div class="story-chips">
+        <span class="chip">🍛 Indverskur karri</span>
+        <span class="chip">🥬 Kóresk kimchi</span>
+        <span class="chip">🔥 Sichuan matargerð</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ÞORKEL SECTION -->
+<section class="thorkel-section" id="thorkel">
+  <h2 class="thorkel-title">Nöfn þeirra sem gerðu þetta mögulegt</h2>
+  <p class="thorkel-sub">Við the way — þorkel er líka partur af þessari sögu 🌶️</p>
+  <div class="thorkel-names">
+    <span class="thorkel-name red">Þorkel</span>
+    <span class="thorkel-name yellow">Þorkel</span>
+    <span class="thorkel-name red">Þorkel</span>
+    <span class="thorkel-name yellow">Þorkel</span>
+    <span class="thorkel-name red">Þorkel</span>
+    <span class="thorkel-name yellow">Þorkel</span>
+    <span class="thorkel-name red">Þorkel</span>
+    <span class="thorkel-name yellow">Þorkel</span>
+    <span class="thorkel-name red">Þorkel</span>
+    <span class="thorkel-name yellow">Þorkel</span>
+    <span class="thorkel-name red">Þorkel</span>
+    <span class="thorkel-name yellow">Þorkel</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-title">🇪🇸 Sagan sem var aldrei kennt</p>
+  <p>Skólverkefni um spænskar matarheimildir og áhrif þeirra á matargerð heimsins</p>
+  <p style="margin-top:0.5rem;">Myndir frá <strong>Wikimedia Commons</strong> (almenningseign) · Textinn er á íslensku</p>
+  <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">Kólumbískar skiptingar · 1492 – nútíminn · ¡Olé!</p>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.tl-item, .story-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
